@@ -17,6 +17,12 @@ async function bootstrap() {
 
 	swaggerCfg(app)
 
-	await app.listen(process.env.PORT ?? 3000)
+	const port = config.getOrThrow<number>('HTTP_PORT')
+	const host = config.getOrThrow<string>('HTTP_HOST')
+
+	await app.listen(port)
+
+	console.log(`🚀 Gateway started: ${host}:${port}`)
+	console.log(`📚 Swagger: ${host}:${port}/docs`)
 }
 bootstrap()
