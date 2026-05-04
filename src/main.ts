@@ -3,6 +3,7 @@ import { NestFactory } from '@nestjs/core'
 import cookieParser from 'cookie-parser'
 
 import { AppModule } from './core/app.module'
+import './observability/tracing'
 import { corsCfg, swaggerCfg } from './shared/config'
 import { GrpcFilter } from './shared/filters'
 
