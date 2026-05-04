@@ -1,6 +1,8 @@
 import { Module } from '@nestjs/common'
 import { ConfigModule } from '@nestjs/config'
 
+import { AuthModule } from '@/modules/auth/auth.module'
+
 import { AppController } from './app.controller'
 
 @Module({
@@ -13,7 +15,8 @@ import { AppController } from './app.controller'
 				`.env.${process.env.NODE_ENV}`,
 				'.env'
 			]
-		})
+		}),
+		AuthModule
 	],
 	providers: [AppController]
 })
