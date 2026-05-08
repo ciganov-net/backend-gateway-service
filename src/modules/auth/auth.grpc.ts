@@ -1,4 +1,4 @@
-import { AuthServiceClient } from '@ciganov/contracts'
+import { AuthServiceClient } from '@ciganov/contracts/gen/auth'
 import { Inject, Injectable, OnModuleInit } from '@nestjs/common'
 import type { ClientGrpc } from '@nestjs/microservices'
 
@@ -22,5 +22,13 @@ export class AuthClientGrpc implements OnModuleInit {
 
 	public verifyOtp(request: VerifyOtpRequest) {
 		return this.authService.verifyOtp(request)
+	}
+
+	public refreshToken(token: string) {
+		return this.authService.refreshToken({ token })
+	}
+
+	public getSession(token: string) {
+		return this.authService.getSessionByToken({ token })
 	}
 }

@@ -1,15 +1,21 @@
+import { Role } from '@ciganov/contracts/gen/account'
 import {
 	Body,
 	Controller,
+	Get,
 	HttpCode,
 	HttpStatus,
 	Post,
-	Res
+	Req,
+	Res,
+	UnauthorizedException
 } from '@nestjs/common'
 import { ConfigService } from '@nestjs/config'
 import { ApiOperation } from '@nestjs/swagger'
 import type { Response } from 'express'
 import { lastValueFrom } from 'rxjs'
+
+import { CurrentUser, Protected } from '@/shared/decorators'
 
 import { AuthClientGrpc } from './auth.grpc'
 import { SendOtpRequest, VerifyOtpRequest } from './dto'
@@ -42,7 +48,7 @@ export class AuthController {
 		@Res({ passthrough: true }) res: Response
 	) {
 		const { token } = await lastValueFrom(this.client.verifyOtp(dto))
-		res.cookie('session', token, {
+		res.cookie('x-session-token', token, {
 			httpOnly: true,
 			sameSite: 'lax',
 			secure:
@@ -52,5 +58,40 @@ export class AuthController {
 		})
 
 		return { ok: true }
+	}
+
+	@Protected()
+	@ApiOperation({
+		summary: 'Refresh token',
+		description: 'Refreshing session token to 30days from'
+	})
+	@Post('tokens/refresh')
+	@HttpCode(HttpStatus.OK)
+	public async refreshToken(@Req() req: Request) {
+		const token = req.headers['x-session-token']
+
+		if (typeof token !== 'string') {
+			throw new UnauthorizedException()
+		}
+
+		this.client.refreshToken(token)
+		return
+	}
+
+	@Protected()
+	@ApiOperation({
+		summary: 'Get user session',
+		description: 'Getting user session by token'
+	})
+	@Get('tokens/session')
+	@HttpCode(HttpStatus.OK)
+	public async getUserSession(@Req() req: Request) {
+		const token = req.headers['x-session-token']
+
+		if (typeof token !== 'string') {
+			throw new UnauthorizedException()
+		}
+		const { session } = await lastValueFrom(this.client.getSession(token))
+		return session
 	}
 }
