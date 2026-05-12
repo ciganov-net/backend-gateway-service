@@ -3,6 +3,7 @@ import { ConfigModule } from '@nestjs/config'
 
 import { AccountsModule } from '@/modules/accounts/accounts.module'
 import { AuthModule } from '@/modules/auth/auth.module'
+import { UsersModule } from '@/modules/users/users.module'
 import { ObservabilityModule } from '@/observability/observability.module'
 
 import { AppController } from './app.controller'
@@ -20,9 +21,9 @@ import { AppController } from './app.controller'
 		}),
 		ObservabilityModule,
 		AuthModule,
-		AccountsModule
+		AccountsModule,
+		UsersModule
 	],
-	providers: [AppController],
 	controllers: [AppController]
 })
 export class AppModule {}

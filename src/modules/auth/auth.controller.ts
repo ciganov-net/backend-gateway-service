@@ -1,4 +1,3 @@
-import { Role } from '@ciganov/contracts/gen/account'
 import {
 	Body,
 	Controller,
@@ -15,7 +14,7 @@ import { ApiOperation } from '@nestjs/swagger'
 import type { Response } from 'express'
 import { lastValueFrom } from 'rxjs'
 
-import { CurrentUser, Protected } from '@/shared/decorators'
+import { Protected } from '@/shared/decorators'
 
 import { AuthClientGrpc } from './auth.grpc'
 import { SendOtpRequest, VerifyOtpRequest } from './dto'

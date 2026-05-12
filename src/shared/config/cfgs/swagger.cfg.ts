@@ -11,7 +11,7 @@ export function swaggerCfg(app: INestApplication) {
 			'https://ciganov.net',
 			'ciganov-net@gmail.com'
 		)
-		.addBearerAuth()
+		.addCookieAuth('x-session-token')
 		.build()
 
 	const document = SwaggerModule.createDocument(app, config)

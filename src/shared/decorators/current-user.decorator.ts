@@ -1,4 +1,4 @@
-import type { GetAccountResponse } from '@ciganov/contracts/gen/account'
+import type { GetAccountResponse } from '@ciganov/contracts/dist/gen/account'
 import { createParamDecorator, ExecutionContext } from '@nestjs/common'
 import type { Request } from 'express'
 

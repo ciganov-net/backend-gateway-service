@@ -1,4 +1,4 @@
-import { AccountServiceClient } from '@ciganov/contracts/gen/account'
+import { AccountServiceClient } from '@ciganov/contracts/dist/gen/account'
 import { Inject, Injectable } from '@nestjs/common'
 import type { ClientGrpc } from '@nestjs/microservices'
 

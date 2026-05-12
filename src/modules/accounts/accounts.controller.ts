@@ -11,6 +11,7 @@ import { ConfirmEmailChangeRequest, InitEmailChangeRequest } from './dto'
 export class AccountsController {
 	constructor(private readonly client: AccountsClientGrpc) {}
 
+	
 	@Protected()
 	@ApiOperation({
 		summary: 'Initialize email change',

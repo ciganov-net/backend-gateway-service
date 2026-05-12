@@ -1,4 +1,4 @@
-import { Role } from '@ciganov/contracts/gen/account'
+import { Role } from '@ciganov/contracts/dist/gen/account'
 import {
 	CanActivate,
 	ExecutionContext,
@@ -7,6 +7,9 @@ import {
 } from '@nestjs/common'
 import { Reflector } from '@nestjs/core'
 import { Request } from 'express'
+
+import { AccountsClientGrpc } from '@/modules/accounts/accounts.grpc'
+import { AuthClientGrpc } from '@/modules/auth/auth.grpc'
 
 import { ROLES_KEY } from '../decorators'
 
@@ -30,7 +33,7 @@ export class RolesGuard implements CanActivate {
 
 		if (!required.includes(user.role))
 			throw new ForbiddenException(
-				'You dont have permission to access this resourse  '
+				'You dont have permission to access this resource'
 			)
 		return true
 	}

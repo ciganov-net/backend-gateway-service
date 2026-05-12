@@ -1,4 +1,4 @@
-import { Role } from '@ciganov/contracts/gen/account'
+import { Role } from '@ciganov/contracts/dist/gen/account'
 import { applyDecorators, UseGuards } from '@nestjs/common'
 
 import { RolesGuard, SessionGuard } from '../guards'

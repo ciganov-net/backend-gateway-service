@@ -1,4 +1,4 @@
-import { AuthServiceClient } from '@ciganov/contracts/gen/auth'
+import { AuthServiceClient } from '@ciganov/contracts/dist/gen/auth'
 import { Inject, Injectable, OnModuleInit } from '@nestjs/common'
 import type { ClientGrpc } from '@nestjs/microservices'
 

@@ -1,4 +1,4 @@
-import { Role } from '@ciganov/contracts/gen/account'
+import { Role } from '@ciganov/contracts/dist/gen/account'
 import { SetMetadata } from '@nestjs/common'
 
 export const ROLES_KEY = 'required_roles'

@@ -1,11 +1,12 @@
 import { PROTO_PATHS } from '@ciganov/contracts'
-import { Module } from '@nestjs/common'
+import { Global, Module } from '@nestjs/common'
 import { ConfigService } from '@nestjs/config'
 import { ClientsModule, Transport } from '@nestjs/microservices'
 
 import { AccountsController } from './accounts.controller'
 import { AccountsClientGrpc } from './accounts.grpc'
 
+@Global()
 @Module({
 	controllers: [AccountsController],
 	providers: [AccountsClientGrpc],
@@ -24,6 +25,7 @@ import { AccountsClientGrpc } from './accounts.grpc'
 				inject: [ConfigService]
 			}
 		])
-	]
+	],
+	exports: [AccountsClientGrpc]
 })
 export class AccountsModule {}

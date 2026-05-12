@@ -19,7 +19,7 @@ export class SessionGuard implements CanActivate {
 
 	async canActivate(context: ExecutionContext): Promise<boolean> {
 		const request = context.switchToHttp().getRequest<Request>()
-		const token = request.headers['x-session-token']
+		const token = request.cookies['x-session-token']
 
 		if (typeof token !== 'string') throw new UnauthorizedException()
 
@@ -28,7 +28,7 @@ export class SessionGuard implements CanActivate {
 		const { session } = await lastValueFrom(this.authClient.getSession(token))
 		if (!session) throw new UnauthorizedException('Session expired')
 
-		this.authClient.refreshToken(token)
+		this.authClient.refreshToken(token).subscribe()
 
 		const user = await lastValueFrom(
 			this.accountClient.getAccount(session.userId)
