@@ -1,5 +1,6 @@
 import { PromoType } from '@ciganov/contracts/dist/gen/bonus'
 import { ApiProperty } from '@nestjs/swagger'
+import { Type } from 'class-transformer'
 import {
 	IsDate,
 	IsEnum,
@@ -25,7 +26,7 @@ export class CreatePromoRequest {
 	amount: number
 
 	@ApiProperty({
-		example: PromoType
+		example: PromoType.FIXED
 	})
 	@IsNotEmpty()
 	@IsEnum(PromoType)
@@ -41,6 +42,7 @@ export class CreatePromoRequest {
 	@ApiProperty({
 		example: new Date()
 	})
+	@Type(() => Date)
 	@IsNotEmpty()
 	@IsDate()
 	expiresAt: Date

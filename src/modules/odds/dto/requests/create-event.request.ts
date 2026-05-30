@@ -1,5 +1,6 @@
 import { EventStatus } from '@ciganov/contracts/dist/gen/odd'
 import { ApiProperty } from '@nestjs/swagger'
+import { Type } from 'class-transformer'
 import { IsDate, IsEnum, IsNotEmpty, IsString } from 'class-validator'
 
 export class CreateEventRequest {
@@ -27,6 +28,7 @@ export class CreateEventRequest {
 	@ApiProperty({
 		example: new Date()
 	})
+	@Type(() => Date)
 	@IsNotEmpty()
 	@IsDate()
 	start: Date
@@ -34,6 +36,7 @@ export class CreateEventRequest {
 	@ApiProperty({
 		example: new Date()
 	})
+	@Type(() => Date)
 	@IsNotEmpty()
 	@IsDate()
 	end: Date

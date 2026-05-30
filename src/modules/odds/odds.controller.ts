@@ -43,7 +43,7 @@ export class OddsController {
 	@HttpCode(HttpStatus.OK)
 	async getCategories(): Promise<CategoryResponse[]> {
 		const response = await lastValueFrom(this.client.getCategories())
-		return response.categories
+		return response?.categories
 	}
 
 	@ApiOperation({
@@ -58,7 +58,7 @@ export class OddsController {
 	@HttpCode(HttpStatus.OK)
 	async getCategory(@Param('id') id: string): Promise<CategoryResponse> {
 		const response = await lastValueFrom(this.client.getCategory(id))
-		return response.category
+		return response?.category
 	}
 
 	@ApiOperation({
@@ -129,7 +129,7 @@ export class OddsController {
 	@HttpCode(HttpStatus.OK)
 	async getEventsByCategory(@Param('id') id: string): Promise<EventResponse[]> {
 		const response = await lastValueFrom(this.client.getEventByCategory(id))
-		return response.events.map(event => ({
+		return response?.events?.map(event => ({
 			id: event.id,
 			name: event.name,
 			categoryId: event.categoryId,
@@ -187,6 +187,6 @@ export class OddsController {
 		@Param('id') eventId: string
 	): Promise<OutcomeResponse[]> {
 		const response = await lastValueFrom(this.client.getOutcomeByEvent(eventId))
-		return response.outcomes
+		return response?.outcomes
 	}
 }

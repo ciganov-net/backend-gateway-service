@@ -13,7 +13,6 @@ export class GrpcFilter implements ExceptionFilter {
 	catch(exception: any, host: ArgumentsHost) {
 		const ctx = host.switchToHttp()
 		const response = ctx.getResponse<Response>()
-
 		if (this.isGrpcError(exception)) {
 			const status = grpcToHttpStatus[exception.code] || 500
 
@@ -25,10 +24,20 @@ export class GrpcFilter implements ExceptionFilter {
 
 		if (exception instanceof HttpException) {
 			const status = exception.getStatus()
+			const res = exception.getResponse()
+
+			let message: string | string[]
+			if (typeof res === 'string') {
+				message = res
+			} else if (typeof res === 'object' && 'message' in res) {
+				message = (res as any).message
+			} else {
+				message = 'HTTP error'
+			}
 
 			return response.status(status).json({
 				statusCode: status,
-				message: exception.message || 'HTTP error'
+				message
 			})
 		}
 

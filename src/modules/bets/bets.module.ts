@@ -24,6 +24,22 @@ import { BetClientGrpc } from './bets.grpc'
 				}),
 				inject: [ConfigService]
 			}
+		]),
+		ClientsModule.registerAsync([
+			{
+				name: 'BETTING_CLIENT',
+				useFactory: (configService: ConfigService) => ({
+					transport: Transport.RMQ,
+					options: {
+						urls: [configService.getOrThrow<string>('RMQ_URL')],
+						queue: 'betting_queue',
+						queueOptions: {
+							durable: true
+						}
+					}
+				}),
+				inject: [ConfigService]
+			}
 		])
 	]
 })

@@ -37,7 +37,7 @@ export class BonusesController {
 	@Get('all')
 	async getPromoCodes(): Promise<GetPromoCodesResponse[]> {
 		const response = await lastValueFrom(this.client.getPromoCodes())
-		return response.promocodes.map(value => {
+		return response?.promocodes?.map(value => {
 			return {
 				...value,
 				expiresAt: protoToDate(value.expiresAt)
