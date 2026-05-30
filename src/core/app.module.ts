@@ -3,6 +3,8 @@ import { ConfigModule } from '@nestjs/config'
 
 import { AccountsModule } from '@/modules/accounts/accounts.module'
 import { AuthModule } from '@/modules/auth/auth.module'
+import { BalancesModule } from '@/modules/balances/balances.module'
+import { BetsModule } from '@/modules/bets/bets.module'
 import { UsersModule } from '@/modules/users/users.module'
 import { ObservabilityModule } from '@/observability/observability.module'
 
@@ -22,7 +24,9 @@ import { AppController } from './app.controller'
 		ObservabilityModule,
 		AuthModule,
 		AccountsModule,
-		UsersModule
+		UsersModule,
+		BalancesModule,
+		BetsModule
 	],
 	controllers: [AppController]
 })

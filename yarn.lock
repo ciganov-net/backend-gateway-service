@@ -316,9 +316,9 @@
   integrity sha512-B/XlCaFIP8LOwzo+bz5uFzATYokcwCKQcghqnlfwSmM5eX/qTkvDBnDPs+gXtX/RyjxJ4DRikECcPJbyALA8FA==
 
 "@ciganov/contracts@^1.0.2":
-  version "1.1.2"
-  resolved "https://registry.yarnpkg.com/@ciganov/contracts/-/contracts-1.1.2.tgz#6cf75eda1682d0e3df639f4bb7cda0b2de2b5f2e"
-  integrity sha512-VMplo5agcy337RXRJ2g1HExIY3DXpdLTUCoCFzbcmiYDioADvpnJOc7zvnSP0IBiXbZg3AyCEFIax7it8+Kcfw==
+  version "1.1.11"
+  resolved "https://registry.yarnpkg.com/@ciganov/contracts/-/contracts-1.1.11.tgz#10565afcd01581a1f8c5a3b0a218ad48bdb513cc"
+  integrity sha512-G5gWlb4MveMO4munpedOszgDMoXgDjLHLNTnXMLOYr88KR7Ycq0oibqNRW/27hZ48StA7oARzgs8SMbL9VmE7g==
   dependencies:
     "@nestjs/microservices" "^11.1.11"
     cpy-cli "^7.0.0"
@@ -326,9 +326,9 @@
     ts-proto "^2.10.1"
 
 "@ciganov/core@^1.0.0":
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/@ciganov/core/-/core-1.0.0.tgz#1ea5b9457a91db29439206a5862237aed5e996ac"
-  integrity sha512-wBmIKikERFuIpyzC8Aj2dE5EvNf6isBINCuS5WwooxxtUHXDhf3HQdGtp9FtSoXYQfXmqD2+sfMzJA5jXLI7YA==
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/@ciganov/core/-/core-1.0.2.tgz#ec31e06695b1b1994497339c9dc0bfc7b0f04240"
+  integrity sha512-Y4G2Qcz+aVpmD2NCmeCA0pkkSla5w63TMOhy+5zQKyQhb0UnlHxjgfr8X9X/xmNtg1NnB60pGfl4YE3ov3fvzw==
   dependencies:
     "@nestjs/config" "^4.0.4"
     "@trivago/prettier-plugin-sort-imports" "^6.0.2"
@@ -967,7 +967,15 @@
   resolved "https://registry.yarnpkg.com/@nestjs/mapped-types/-/mapped-types-2.1.1.tgz#9530ac3250ab433ba6ef831e9dd5d483f5fc8144"
   integrity sha512-SCCoMEJ6jdeI5h/N+KCVF1+pmg/hmEkNA5nHTS8Gvww7T/LCl4o1gFLinw2iQ60w7slFkszHcGLKGdazVI4F8A==
 
-"@nestjs/microservices@^11.1.11", "@nestjs/microservices@^11.1.19":
+"@nestjs/microservices@^11.1.11":
+  version "11.1.24"
+  resolved "https://registry.yarnpkg.com/@nestjs/microservices/-/microservices-11.1.24.tgz#8ae7bf8b4bec2ef377a2c8dc6eba3e33ad5f163e"
+  integrity sha512-ALu/7qk3obFlw7KVSPRz+BjuyWPLmv9isknhLG8UYXkjx3aPhJGp52i3qiTqucM1jKtoBgPa3+SK4e9fVvglGA==
+  dependencies:
+    iterare "1.2.1"
+    tslib "2.8.1"
+
+"@nestjs/microservices@^11.1.19":
   version "11.1.19"
   resolved "https://registry.yarnpkg.com/@nestjs/microservices/-/microservices-11.1.19.tgz#0222ca2331a2a702df3b4dd6b7fd2fe7487fb39a"
   integrity sha512-3Oja56ydTlSaui19/i7gYM0MMqz/w4UR2aqZeL4K8B+Fq0Ztg3zHb8et76atToJGpSCevJLEsoEMOMaGgzRwfg==

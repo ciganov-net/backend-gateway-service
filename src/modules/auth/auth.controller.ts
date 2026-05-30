@@ -10,7 +10,7 @@ import {
 	UnauthorizedException
 } from '@nestjs/common'
 import { ConfigService } from '@nestjs/config'
-import { ApiOperation } from '@nestjs/swagger'
+import { ApiOperation, ApiResponse } from '@nestjs/swagger'
 import type { Response } from 'express'
 import { lastValueFrom } from 'rxjs'
 
@@ -18,6 +18,7 @@ import { Protected } from '@/shared/decorators'
 
 import { AuthClientGrpc } from './auth.grpc'
 import { SendOtpRequest, VerifyOtpRequest } from './dto'
+import { SendOtpResponse, VerifyOtpResponse } from './dto/responses'
 
 @Controller('auth')
 export class AuthController {
@@ -30,10 +31,13 @@ export class AuthController {
 		summary: 'Send otp code',
 		description: 'Sends a verification code to the user email'
 	})
+	@ApiResponse({
+		type: SendOtpResponse
+	})
 	@Post('otp/send')
 	@HttpCode(HttpStatus.OK)
-	public sendOtp(@Body() dto: SendOtpRequest) {
-		return this.client.sendOtp(dto)
+	public async sendOtp(@Body() dto: SendOtpRequest): Promise<SendOtpResponse> {
+		return await lastValueFrom(this.client.sendOtp(dto))
 	}
 
 	@ApiOperation({
@@ -41,11 +45,14 @@ export class AuthController {
 		description: 'Verifies a verification code sent to the user email'
 	})
 	@Post('otp/verify')
+	@ApiResponse({
+		type: VerifyOtpResponse
+	})
 	@HttpCode(HttpStatus.OK)
 	public async verifyOtp(
 		@Body() dto: VerifyOtpRequest,
 		@Res({ passthrough: true }) res: Response
-	) {
+	): Promise<VerifyOtpResponse> {
 		const { token } = await lastValueFrom(this.client.verifyOtp(dto))
 		res.cookie('x-session-token', token, {
 			httpOnly: true,
