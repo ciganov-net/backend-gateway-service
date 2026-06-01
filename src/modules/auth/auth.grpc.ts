@@ -31,4 +31,12 @@ export class AuthClientGrpc implements OnModuleInit {
 	public getSession(token: string) {
 		return this.authService.getSessionByToken({ token })
 	}
+
+	public revoke(token: string) {
+		return this.authService.refreshToken({ token })
+	}
+
+	public revokeAll(userId: string) {
+		return this.authService.revokeAllSessions({ userId })
+	}
 }

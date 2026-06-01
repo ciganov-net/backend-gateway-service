@@ -89,7 +89,7 @@ export class AuthController {
 		summary: 'Get user session',
 		description: 'Getting user session by token'
 	})
-	@Get('tokens/session')
+	@Get('tokens/sessions')
 	@HttpCode(HttpStatus.OK)
 	public async getUserSession(@Req() req: Request) {
 		const token = req.headers['x-session-token']
@@ -99,5 +99,65 @@ export class AuthController {
 		}
 		const { session } = await lastValueFrom(this.client.getSession(token))
 		return session
+	}
+
+	@Protected()
+	@ApiOperation({
+		summary: 'Revoke token',
+		description: 'Revoke user session and logout'
+	})
+	@Post('tokens/revoke')
+	@HttpCode(HttpStatus.OK)
+	public revoke(
+		@Req() req: Request,
+		@Res({ passthrough: true }) res: Response
+	) {
+		const token = req.headers['x-session-token']
+
+		if (typeof token !== 'string') {
+			throw new UnauthorizedException()
+		}
+
+		this.client.revoke(token)
+
+		res.cookie('x-session-token', '', {
+			httpOnly: true,
+			sameSite: 'lax',
+			secure:
+				this.configService.getOrThrow<string>('NODE_ENV') !== 'development',
+			domain: this.configService.getOrThrow<string>('COOKIES_DOMAIN'),
+			expires: new Date(0)
+		})
+		return
+	}
+
+	@Protected()
+	@ApiOperation({
+		summary: 'Revoke all tokens',
+		description: 'Revoke all user session and logout'
+	})
+	@Post('tokens/revoke-all')
+	@HttpCode(HttpStatus.OK)
+	public revokeAll(
+		@Req() req: Request,
+		@Res({ passthrough: true }) res: Response
+	) {
+		const token = req.headers['x-session-token']
+
+		if (typeof token !== 'string') {
+			throw new UnauthorizedException()
+		}
+
+		this.client.revoke(token)
+
+		res.cookie('x-session-token', '', {
+			httpOnly: true,
+			sameSite: 'lax',
+			secure:
+				this.configService.getOrThrow<string>('NODE_ENV') !== 'development',
+			domain: this.configService.getOrThrow<string>('COOKIES_DOMAIN'),
+			expires: new Date(0)
+		})
+		return
 	}
 }
