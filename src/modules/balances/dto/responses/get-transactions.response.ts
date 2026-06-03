@@ -6,6 +6,6 @@ export class GetTransactionsResponse {
 		type: TransactionType
 		amount: number
 		eventId: string
-		created_at: Date
+		createdAt: Date
 	}
 }

@@ -34,7 +34,9 @@ export class BalancesController {
 	@Get('balance')
 	@HttpCode(HttpStatus.OK)
 	async getBalance(@CurrentUser('id') userId: string) {
-		return await lastValueFrom(this.client.getBalance(userId))
+		const balance = await lastValueFrom(this.client.getBalance(userId))
+		console.log(balance)
+		return balance
 	}
 
 	@ApiOperation({

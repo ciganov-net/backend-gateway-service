@@ -22,6 +22,7 @@ import {
 	CreateOutcomeRequest,
 	CreateOutcomeResponse,
 	EventResponse,
+	GetRandomEventsRequest,
 	OutcomeResponse,
 	SwitchEventStateResponse
 } from './dto'
@@ -188,5 +189,33 @@ export class OddsController {
 	): Promise<OutcomeResponse[]> {
 		const response = await lastValueFrom(this.client.getOutcomeByEvent(eventId))
 		return response?.outcomes
+	}
+
+	@ApiOperation({
+		summary: 'Get random events',
+		description: 'Get random events by count'
+	})
+	@ApiOkResponse({
+		type: [EventResponse]
+	})
+	@Protected()
+	@Get('event/random/:randomCount')
+	@HttpCode(HttpStatus.OK)
+	async getRandomEvents(
+		@Param('randomCount') randomCount: number
+	): Promise<EventResponse[]> {
+		const response = await lastValueFrom(
+			this.client.getRandomEvents(randomCount)
+		)
+		return response.events.map(event => ({
+			id: event.id,
+			name: event.name,
+			categoryId: event.categoryId,
+			isLive: event.isLive,
+			status: event.status,
+			outcomes: event.outcomes,
+			start: protoToDate(event.start),
+			end: protoToDate(event.end)
+		}))
 	}
 }

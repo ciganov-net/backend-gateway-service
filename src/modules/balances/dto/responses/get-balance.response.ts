@@ -1,8 +1,20 @@
+import { ApiProperty } from '@nestjs/swagger'
+
+class Balance {
+	@ApiProperty()
+	id: string
+
+	@ApiProperty()
+	mainBalance: number
+
+	@ApiProperty()
+	bonusBalance: number
+
+	@ApiProperty()
+	freezeBalance: number
+}
+
 export class GetBalanceResponse {
-	balance: {
-		id: string
-		main_balance: number
-		bonus_balance: number
-		freeze_balance: number
-	}
+	@ApiProperty()
+	balance: Balance
 }

@@ -63,4 +63,8 @@ export class OddsClientGrpc {
 	public getOutcomeByEvent(eventId: string) {
 		return this.oddsService.getOutcomeByEvent({ eventId })
 	}
+
+	public getRandomEvents(randomCount: number) {
+		return this.oddsService.getRandomEvents({ randomCount })
+	}
 }
