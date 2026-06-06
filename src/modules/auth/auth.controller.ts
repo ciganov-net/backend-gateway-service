@@ -14,7 +14,7 @@ import { ApiOperation, ApiResponse } from '@nestjs/swagger'
 import type { Response } from 'express'
 import { lastValueFrom } from 'rxjs'
 
-import { Protected } from '@/shared/decorators'
+import { CurrentUser, Protected } from '@/shared/decorators'
 
 import { AuthClientGrpc } from './auth.grpc'
 import { SendOtpRequest, VerifyOtpRequest } from './dto'
@@ -91,12 +91,7 @@ export class AuthController {
 	})
 	@Get('tokens/sessions')
 	@HttpCode(HttpStatus.OK)
-	public async getUserSession(@Req() req: Request) {
-		const token = req.headers['x-session-token']
-
-		if (typeof token !== 'string') {
-			throw new UnauthorizedException()
-		}
+	public async getUserSession(@CurrentUser() token: string) {
 		const { session } = await lastValueFrom(this.client.getSession(token))
 		return session
 	}
@@ -109,15 +104,9 @@ export class AuthController {
 	@Post('tokens/revoke')
 	@HttpCode(HttpStatus.OK)
 	public revoke(
-		@Req() req: Request,
-		@Res({ passthrough: true }) res: Response
+		@Res({ passthrough: true }) res: Response,
+		@CurrentUser() token: string
 	) {
-		const token = req.headers['x-session-token']
-
-		if (typeof token !== 'string') {
-			throw new UnauthorizedException()
-		}
-
 		this.client.revoke(token)
 
 		res.cookie('x-session-token', '', {
@@ -139,15 +128,9 @@ export class AuthController {
 	@Post('tokens/revoke-all')
 	@HttpCode(HttpStatus.OK)
 	public revokeAll(
-		@Req() req: Request,
-		@Res({ passthrough: true }) res: Response
+		@Res({ passthrough: true }) res: Response,
+		@CurrentUser() token: string
 	) {
-		const token = req.headers['x-session-token']
-
-		if (typeof token !== 'string') {
-			throw new UnauthorizedException()
-		}
-
 		this.client.revoke(token)
 
 		res.cookie('x-session-token', '', {

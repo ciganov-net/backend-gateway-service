@@ -35,7 +35,6 @@ export class BalancesController {
 	@HttpCode(HttpStatus.OK)
 	async getBalance(@CurrentUser('id') userId: string) {
 		const balance = await lastValueFrom(this.client.getBalance(userId))
-		console.log(balance)
 		return balance
 	}
 

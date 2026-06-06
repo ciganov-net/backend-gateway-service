@@ -20,6 +20,10 @@ export class UsersClientGrpc implements OnModuleInit {
 		return this.userService.getMe({ id: userId })
 	}
 
+	public getWorstPlayers(count: number) {
+		return this.userService.getWorstPlayers({ limit: count })
+	}
+
 	public patch(userId: string, request: PatchUserRequest) {
 		return this.userService.patchUser({
 			user: {
