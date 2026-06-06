@@ -15,4 +15,11 @@ export class CreateCategoryRequest {
 	@IsNotEmpty()
 	@IsString()
 	slug: string
+
+	@ApiProperty({
+		example: 'description'
+	})
+	@IsNotEmpty()
+	@IsString()
+	description: string
 }

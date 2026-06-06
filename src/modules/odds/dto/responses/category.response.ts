@@ -9,4 +9,6 @@ export class CategoryResponse {
 	slug: string
 	@ApiProperty()
 	isActive: boolean
+	@ApiProperty()
+	description: string
 }
