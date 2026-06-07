@@ -1,12 +1,16 @@
-import { OddServiceClient } from '@ciganov/contracts/dist/gen/odd'
-import { dateToProto } from '@ciganov/core'
+import {
+	GetEventsRequest_SortBy,
+	OddServiceClient
+} from '@ciganov/contracts/dist/gen/odd'
+import { convertEnum, dateToProto } from '@ciganov/core'
 import { Inject, Injectable } from '@nestjs/common'
 import type { ClientGrpc } from '@nestjs/microservices'
 
 import {
 	CreateCategoryRequest,
 	CreateEventRequest,
-	CreateOutcomeRequest
+	CreateOutcomeRequest,
+	GetEventsQuery
 } from './dto'
 
 @Injectable()
@@ -34,8 +38,17 @@ export class OddsClientGrpc {
 		return this.oddsService.createCategory(request)
 	}
 
-	public getEvents() {
-		return this.oddsService.getEvents({})
+	public getEvents(request: GetEventsQuery) {
+		console.log(convertEnum(GetEventsRequest_SortBy, request.orderBy))
+		return this.oddsService.getEvents({
+			outcomeTypes: request.outcomeTypes ?? [],
+			orderBy: convertEnum(GetEventsRequest_SortBy, request.orderBy),
+			skip: request.skip,
+			take: request.take,
+			search: request.search,
+			maxCoefficient: request.maxCoefficient,
+			minCoefficient: request.minCoefficient
+		})
 	}
 
 	public createEvent(request: CreateEventRequest) {

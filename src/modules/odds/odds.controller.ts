@@ -6,9 +6,15 @@ import {
 	HttpCode,
 	HttpStatus,
 	Param,
-	Post
+	Post,
+	Query
 } from '@nestjs/common'
-import { ApiOkResponse, ApiOperation } from '@nestjs/swagger'
+import {
+	ApiExtraModels,
+	ApiOkResponse,
+	ApiOperation,
+	ApiQuery
+} from '@nestjs/swagger'
 import { lastValueFrom } from 'rxjs'
 
 import { Protected } from '@/shared/decorators'
@@ -22,6 +28,7 @@ import {
 	CreateOutcomeRequest,
 	CreateOutcomeResponse,
 	EventResponse,
+	GetEventsQuery,
 	GetRandomEventsRequest,
 	OutcomeResponse,
 	SwitchEventStateResponse
@@ -104,8 +111,8 @@ export class OddsController {
 	@Protected()
 	@Get('events')
 	@HttpCode(HttpStatus.OK)
-	async getEvents(): Promise<EventResponse[]> {
-		const response = await lastValueFrom(this.client.getEvents())
+	async getEvents(@Query() query: GetEventsQuery): Promise<EventResponse[]> {
+		const response = await lastValueFrom(this.client.getEvents(query))
 		return response.events.map(value => ({
 			id: value.id,
 			categoryId: value.categoryId,
