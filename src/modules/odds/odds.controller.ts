@@ -114,7 +114,9 @@ export class OddsController {
 			outcomes: value.outcomes,
 			status: value.status,
 			start: protoToDate(value.start),
-			end: protoToDate(value.end)
+			end: protoToDate(value.end),
+			badgeColor: value.badgeColor,
+			categoryTitle: value.categoryTitle
 		}))
 	}
 
@@ -138,7 +140,9 @@ export class OddsController {
 			status: response.event.status,
 			outcomes: response.event.outcomes,
 			start: protoToDate(response.event.start),
-			end: protoToDate(response.event.end)
+			end: protoToDate(response.event.end),
+			badgeColor: response.event.badgeColor,
+			categoryTitle: response.event.categoryTitle
 		}
 	}
 
@@ -162,7 +166,9 @@ export class OddsController {
 			status: event.status,
 			outcomes: event.outcomes,
 			start: protoToDate(event.start),
-			end: protoToDate(event.end)
+			end: protoToDate(event.end),
+			badgeColor: event.badgeColor,
+			categoryTitle: event.categoryTitle
 		}))
 	}
 
@@ -239,7 +245,9 @@ export class OddsController {
 			status: event.status,
 			outcomes: event.outcomes,
 			start: protoToDate(event.start),
-			end: protoToDate(event.end)
+			end: protoToDate(event.end),
+			badgeColor: event.badgeColor,
+			categoryTitle: event.categoryTitle
 		}))
 	}
 }

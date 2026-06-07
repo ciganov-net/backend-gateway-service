@@ -13,6 +13,10 @@ export class EventResponse {
 	@ApiProperty()
 	categoryId: string
 	@ApiProperty()
+	categoryTitle: string
+	@ApiProperty()
+	badgeColor: string
+	@ApiProperty()
 	start: Date
 	@ApiProperty()
 	end: Date

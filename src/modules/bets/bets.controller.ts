@@ -1,13 +1,26 @@
 import type { OddFinishedEvent } from '@ciganov/contracts'
 import { Role } from '@ciganov/contracts/dist/gen/account'
-import { Body, Controller, HttpCode, HttpStatus, Post } from '@nestjs/common'
+import {
+	Body,
+	Controller,
+	Get,
+	HttpCode,
+	HttpStatus,
+	Param,
+	Post
+} from '@nestjs/common'
 import { ApiOkResponse, ApiOperation } from '@nestjs/swagger'
 import { lastValueFrom } from 'rxjs'
 
 import { CurrentUser, Protected } from '@/shared/decorators'
 
 import { BetClientGrpc } from './bets.grpc'
-import { FinishOddRequest, PlaceBetRequest, PlaceBetResponse } from './dto'
+import {
+	FinishOddRequest,
+	GetBetCountResponse,
+	PlaceBetRequest,
+	PlaceBetResponse
+} from './dto'
 
 @Controller('bets')
 export class BetsController {
@@ -28,6 +41,22 @@ export class BetsController {
 		@CurrentUser('id') userId: string
 	): Promise<PlaceBetResponse> {
 		return await lastValueFrom(this.client.placeBet(dto, userId))
+	}
+
+	@ApiOperation({
+		summary: 'Get bet count',
+		description: 'Get bet count by event id'
+	})
+	@ApiOkResponse({
+		type: GetBetCountResponse
+	})
+	@Protected()
+	@Get('count/:eventId')
+	@HttpCode(HttpStatus.OK)
+	async getBetCount(
+		@Param('eventId') id: string
+	): Promise<GetBetCountResponse> {
+		return await lastValueFrom(this.client.getCount(id))
 	}
 
 	@ApiOperation({

@@ -26,4 +26,8 @@ export class BetClientGrpc {
 	public finishedOdd(request: OddFinishedEvent) {
 		return this.clientClient.emit('odd.finished.request', request)
 	}
+
+	public getCount(eventId: string) {
+		return this.betService.getBetCountByEvent({ eventId })
+	}
 }

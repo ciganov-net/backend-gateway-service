@@ -29,4 +29,11 @@ export class CreateCategoryRequest {
 	@IsNotEmpty()
 	@IsString()
 	image: string
+
+	@ApiProperty({
+		example: 'red'
+	})
+	@IsNotEmpty()
+	@IsString()
+	badgeColor: string
 }

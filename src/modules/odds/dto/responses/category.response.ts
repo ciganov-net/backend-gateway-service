@@ -13,4 +13,6 @@ export class CategoryResponse {
 	description: string
 	@ApiProperty()
 	image: string
+	@ApiProperty()
+	badgeColor: string
 }
