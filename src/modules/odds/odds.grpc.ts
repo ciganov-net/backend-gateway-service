@@ -34,6 +34,10 @@ export class OddsClientGrpc {
 		return this.oddsService.createCategory(request)
 	}
 
+	public getEvents() {
+		return this.oddsService.getEvents({})
+	}
+
 	public createEvent(request: CreateEventRequest) {
 		return this.oddsService.createEvent({
 			categoryId: request.categoryId,

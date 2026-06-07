@@ -11,4 +11,6 @@ export class CategoryResponse {
 	isActive: boolean
 	@ApiProperty()
 	description: string
+	@ApiProperty()
+	image: string
 }

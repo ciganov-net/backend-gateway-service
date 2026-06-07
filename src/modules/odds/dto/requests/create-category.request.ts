@@ -22,4 +22,11 @@ export class CreateCategoryRequest {
 	@IsNotEmpty()
 	@IsString()
 	description: string
+
+	@ApiProperty({
+		example: 'image'
+	})
+	@IsNotEmpty()
+	@IsString()
+	image: string
 }

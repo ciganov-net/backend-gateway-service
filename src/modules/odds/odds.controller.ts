@@ -95,6 +95,30 @@ export class OddsController {
 	}
 
 	@ApiOperation({
+		summary: 'Get events',
+		description: 'Get all events'
+	})
+	@ApiOkResponse({
+		type: [EventResponse]
+	})
+	@Protected()
+	@Get('events')
+	@HttpCode(HttpStatus.OK)
+	async getEvents(): Promise<EventResponse[]> {
+		const response = await lastValueFrom(this.client.getEvents())
+		return response.events.map(value => ({
+			id: value.id,
+			categoryId: value.categoryId,
+			isLive: value.isLive,
+			name: value.name,
+			outcomes: value.outcomes,
+			status: value.status,
+			start: protoToDate(value.start),
+			end: protoToDate(value.end)
+		}))
+	}
+
+	@ApiOperation({
 		summary: 'Get event',
 		description: 'Get event by id'
 	})
