@@ -24,7 +24,7 @@ export class CreateCategoryRequest {
 	description: string
 
 	@ApiProperty({
-		example: 'image'
+		example: '550e8400-e29b-41d4-a716-446655440000.png'
 	})
 	@IsNotEmpty()
 	@IsString()
