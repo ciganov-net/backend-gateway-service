@@ -315,10 +315,10 @@
   resolved "https://registry.yarnpkg.com/@bufbuild/protobuf/-/protobuf-2.12.0.tgz#53225636a8fcebb2bd94998ad9d42f99f96add4d"
   integrity sha512-B/XlCaFIP8LOwzo+bz5uFzATYokcwCKQcghqnlfwSmM5eX/qTkvDBnDPs+gXtX/RyjxJ4DRikECcPJbyALA8FA==
 
-"@ciganov/contracts@^1.1.13":
-  version "1.1.21"
-  resolved "https://registry.yarnpkg.com/@ciganov/contracts/-/contracts-1.1.21.tgz#8e4cf4f18ae47e115b961fa4a33f4c2847cc0f43"
-  integrity sha512-g/oeHQt3BKvtSyGCCdh/fz4OzZCJc7vzANMEs8mU9JlMiZfeONuhXF7akoDKjuO/+H1dnItD2TTBOtpnym/wxg==
+"@ciganov/contracts@^1.1.23":
+  version "1.1.23"
+  resolved "https://registry.yarnpkg.com/@ciganov/contracts/-/contracts-1.1.23.tgz#c37702e11400a68b6460a2ead56d004df7879b34"
+  integrity sha512-uOv4XFSwAXMX69XNA1u7GsMkyqvfNA73PHnMF08eIw8OzKO5U1S5W6qlGHjKs5CZtdB+igvvMwykZtjEm/K87g==
   dependencies:
     "@nestjs/microservices" "^11.1.11"
     cpy-cli "^7.0.0"
@@ -2054,7 +2054,7 @@
     "@types/range-parser" "*"
     "@types/send" "*"
 
-"@types/express@^5.0.6":
+"@types/express@*", "@types/express@^5.0.6":
   version "5.0.6"
   resolved "https://registry.yarnpkg.com/@types/express/-/express-5.0.6.tgz#2d724b2c990dcb8c8444063f3580a903f6d500cc"
   integrity sha512-sKYVuV7Sv9fbPIt/442koC7+IIwK5olP1KWeD88e/idgoJqDm3JV/YUiPwkoKK92ylff2MGxSz1CSjsXelx0YA==
@@ -2111,6 +2111,13 @@
   version "1.1.4"
   resolved "https://registry.yarnpkg.com/@types/methods/-/methods-1.1.4.tgz#d3b7ac30ac47c91054ea951ce9eed07b1051e547"
   integrity sha512-ymXWVrDiCxTBE3+RIrrP533E70eA+9qu7zdWoHuOmGujkYtzf4HQF96b8nwHLqhuf4ykX61IGRIB38CC6/sImQ==
+
+"@types/multer@^2.1.0":
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/@types/multer/-/multer-2.1.0.tgz#c6ae866b9a3d9310b477d021a78b33feda092358"
+  integrity sha512-zYZb0+nJhOHtPpGDb3vqPjwpdeGlGC157VpkqNQL+UU2qwoacoQ7MpsAmUptI/0Oa127X32JzWDqQVEXp2RcIA==
+  dependencies:
+    "@types/express" "*"
 
 "@types/mysql@2.15.27":
   version "2.15.27"
