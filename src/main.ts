@@ -4,6 +4,7 @@ import { NestFactory } from '@nestjs/core'
 import cookieParser from 'cookie-parser'
 
 import { AppModule } from './core/app.module'
+import { createRabbitMQServer } from './infrastructure/rabbitmq/rabbitmq.server'
 import './observability/tracing'
 import { corsCfg, swaggerCfg } from './shared/config'
 import { GrpcFilter } from './shared/filters'
@@ -24,10 +25,12 @@ async function bootstrap() {
 	app.useGlobalFilters(new GrpcFilter())
 
 	swaggerCfg(app)
+	createRabbitMQServer(app, config)
 
 	const port = config.getOrThrow<number>('HTTP_PORT')
 	const host = config.getOrThrow<string>('HTTP_HOST')
 
+	await app.startAllMicroservices()
 	await app.listen(port)
 
 	console.log(`🚀 Gateway started: ${host}:${port}`)

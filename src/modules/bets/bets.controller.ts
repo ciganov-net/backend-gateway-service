@@ -1,4 +1,4 @@
-import type { OddFinishedEvent } from '@ciganov/contracts'
+import type { OddFinishedEvent, OddResolvedEvent } from '@ciganov/contracts'
 import { Role } from '@ciganov/contracts/dist/gen/account'
 import {
 	Body,
@@ -9,6 +9,7 @@ import {
 	Param,
 	Post
 } from '@nestjs/common'
+import { Ctx, EventPattern, Payload, RmqContext } from '@nestjs/microservices'
 import { ApiOkResponse, ApiOperation } from '@nestjs/swagger'
 import { lastValueFrom } from 'rxjs'
 
@@ -72,5 +73,13 @@ export class BetsController {
 	async finishedOdd(@Body() dto: FinishOddRequest): Promise<Boolean> {
 		await lastValueFrom(this.client.finishedOdd(dto))
 		return true
+	}
+
+	@EventPattern('bet.resolved')
+	async handleBetResolved(
+		@Payload() data: OddResolvedEvent,
+		@Ctx() ctx: RmqContext
+	) {
+		this.client.notify(data, ctx)
 	}
 }

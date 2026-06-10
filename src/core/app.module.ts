@@ -1,6 +1,7 @@
 import { Module } from '@nestjs/common'
 import { ConfigModule } from '@nestjs/config'
 
+import { RabbitmqModule } from '@/infrastructure/rabbitmq/rabbitmq.module'
 import { AccountsModule } from '@/modules/accounts/accounts.module'
 import { AuthModule } from '@/modules/auth/auth.module'
 import { BalancesModule } from '@/modules/balances/balances.module'
@@ -24,6 +25,7 @@ import { AppController } from './app.controller'
 			]
 		}),
 		ObservabilityModule,
+		RabbitmqModule,
 		AuthModule,
 		AccountsModule,
 		UsersModule,

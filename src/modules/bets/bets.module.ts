@@ -6,10 +6,11 @@ import { ClientsModule } from '@nestjs/microservices/module/clients.module'
 
 import { BetsController } from './bets.controller'
 import { BetClientGrpc } from './bets.grpc'
+import { BetsWebsocketGateway } from './bets.ws'
 
 @Module({
 	controllers: [BetsController],
-	providers: [BetClientGrpc],
+	providers: [BetClientGrpc, BetsWebsocketGateway],
 	imports: [
 		ClientsModule.registerAsync([
 			{

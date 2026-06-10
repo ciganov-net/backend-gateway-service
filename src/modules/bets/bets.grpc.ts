@@ -1,9 +1,12 @@
 import { OddFinishedEvent } from '@ciganov/contracts'
 import { BettingServiceClient } from '@ciganov/contracts/dist/gen/betting'
 import { Inject, Injectable } from '@nestjs/common'
-import type { ClientGrpc, ClientProxy } from '@nestjs/microservices'
+import type { ClientGrpc, ClientProxy, RmqContext } from '@nestjs/microservices'
 
-import { PlaceBetRequest } from './dto'
+import { RabbitmqService } from '@/infrastructure/rabbitmq/rabbitmq.service'
+
+import { BetsWebsocketGateway } from './bets.ws'
+import { PlaceBetRequest, WsPayload } from './dto'
 
 @Injectable()
 export class BetClientGrpc {
@@ -11,7 +14,9 @@ export class BetClientGrpc {
 
 	public constructor(
 		@Inject('BETTING_PACKAGE') private readonly clientPackage: ClientGrpc,
-		@Inject('BETTING_CLIENT') private readonly clientClient: ClientProxy
+		@Inject('BETTING_CLIENT') private readonly clientClient: ClientProxy,
+		private readonly betWebsocket: BetsWebsocketGateway,
+		private readonly rmqService: RabbitmqService
 	) {}
 
 	public onModuleInit() {
@@ -29,5 +34,14 @@ export class BetClientGrpc {
 
 	public getCount(eventId: string) {
 		return this.betService.getBetCountByEvent({ eventId })
+	}
+
+	public notify(payload: WsPayload, ctx: RmqContext) {
+		try {
+			this.betWebsocket.notify(payload)
+			this.rmqService.ack(ctx)
+		} catch (e) {
+			this.rmqService.nack(ctx)
+		}
 	}
 }
