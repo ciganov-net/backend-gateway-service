@@ -7,8 +7,7 @@ export class CrashService {
 		houseEdge: number = 0.05
 	): number {
 		const r = Math.random()
-		const rawCoef = (1 - houseEdge) / (1 - r)
-		const finalCoef = Math.max(minMultiplier, rawCoef)
+		const finalCoef = Math.max(minMultiplier, r * 5.5 + 1.0 - houseEdge)
 		return Math.floor(finalCoef * 100) / 100
 	}
 }
