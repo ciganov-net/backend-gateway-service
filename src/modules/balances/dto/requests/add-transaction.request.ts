@@ -34,6 +34,5 @@ export class AddTransactionRequest {
 		example: 1.2
 	})
 	@IsOptional()
-	@IsInt()
 	multiplier?: number
 }
