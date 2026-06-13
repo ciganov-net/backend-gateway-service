@@ -7,6 +7,7 @@ import { AuthModule } from '@/modules/auth/auth.module'
 import { BalancesModule } from '@/modules/balances/balances.module'
 import { BetsModule } from '@/modules/bets/bets.module'
 import { BonusesModule } from '@/modules/bonuses/bonuses.module'
+import { CrashModule } from '@/modules/crash/crash.module'
 import { OddsModule } from '@/modules/odds/odds.module'
 import { UsersModule } from '@/modules/users/users.module'
 import { ObservabilityModule } from '@/observability/observability.module'
@@ -32,7 +33,8 @@ import { AppController } from './app.controller'
 		BalancesModule,
 		BetsModule,
 		OddsModule,
-		BonusesModule
+		BonusesModule,
+		CrashModule
 	],
 	controllers: [AppController]
 })
