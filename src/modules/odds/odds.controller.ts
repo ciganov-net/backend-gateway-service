@@ -61,7 +61,6 @@ export class OddsController {
 	@ApiOkResponse({
 		type: CategoryResponse
 	})
-	@Protected()
 	@Get('category/:id')
 	@HttpCode(HttpStatus.OK)
 	async getCategory(@Param('id') id: string): Promise<CategoryResponse> {

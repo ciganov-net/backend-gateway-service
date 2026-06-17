@@ -7,6 +7,7 @@ import { RabbitmqService } from '@/infrastructure/rabbitmq/rabbitmq.service'
 
 import { BetsWebsocketGateway } from './bets.ws'
 import { PlaceBetRequest, WsPayload } from './dto'
+import { GetUserBetsResponse } from './dto/responses/get-user-bets.response'
 
 @Injectable()
 export class BetClientGrpc {
@@ -43,5 +44,9 @@ export class BetClientGrpc {
 		} catch (e) {
 			this.rmqService.nack(ctx)
 		}
+	}
+
+	public getUserBets(id: string) {
+		return this.betService.getUserBets({ userId: id })
 	}
 }

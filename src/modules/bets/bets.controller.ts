@@ -1,5 +1,7 @@
 import type { OddFinishedEvent, OddResolvedEvent } from '@ciganov/contracts'
 import { Role } from '@ciganov/contracts/dist/gen/account'
+import { BetStatus } from '@ciganov/contracts/dist/gen/betting'
+import { convertEnum, protoToDate } from '@ciganov/core'
 import {
 	Body,
 	Controller,
@@ -22,6 +24,7 @@ import {
 	PlaceBetRequest,
 	PlaceBetResponse
 } from './dto'
+import { GetUserBetsResponse } from './dto/responses/get-user-bets.response'
 
 @Controller('bets')
 export class BetsController {
@@ -58,6 +61,33 @@ export class BetsController {
 		@Param('eventId') id: string
 	): Promise<GetBetCountResponse> {
 		return await lastValueFrom(this.client.getCount(id))
+	}
+
+	@ApiOperation({
+		summary: 'Get user bets',
+		description: 'Get all user bets'
+	})
+	@ApiOkResponse({
+		type: [GetUserBetsResponse]
+	})
+	@Protected()
+	@Get('user-bets')
+	@HttpCode(HttpStatus.OK)
+	async getUserBets(
+		@CurrentUser('id') id: string
+	): Promise<GetUserBetsResponse[]> {
+		const bets = await lastValueFrom(this.client.getUserBets(id))
+
+		return bets.bets.map(value => ({
+			status: convertEnum(BetStatus, value.status),
+			actualPayout: value.actualPayout,
+			amount: value.amount,
+			coefficient: value.totalCoefficient,
+			createdAt: protoToDate(value.createdAt),
+			eventName: value.eventName,
+			outcomeName: value.outcomeName,
+			potentialPayout: value.potentialPayout
+		}))
 	}
 
 	@ApiOperation({
