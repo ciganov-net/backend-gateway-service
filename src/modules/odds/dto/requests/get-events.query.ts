@@ -1,6 +1,6 @@
 import { GetEventsRequest_SortBy } from '@ciganov/contracts/dist/gen/odd'
 import { ApiPropertyOptional } from '@nestjs/swagger'
-import { IsEnum } from 'class-validator'
+import { IsEnum, IsOptional } from 'class-validator'
 
 export class GetEventsQuery {
 	@ApiPropertyOptional()
@@ -14,6 +14,7 @@ export class GetEventsQuery {
 		enumName: 'OddsControllerGetEventsOrderBy'
 	})
 	@IsEnum(GetEventsRequest_SortBy)
+	@IsOptional()
 	orderBy?: GetEventsRequest_SortBy
 	@ApiPropertyOptional()
 	minCoefficient: number

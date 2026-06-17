@@ -39,7 +39,6 @@ export class OddsClientGrpc {
 	}
 
 	public getEvents(request: GetEventsQuery) {
-		console.log(convertEnum(GetEventsRequest_SortBy, request.orderBy))
 		return this.oddsService.getEvents({
 			outcomeTypes: request.outcomeTypes ?? [],
 			orderBy: convertEnum(GetEventsRequest_SortBy, request.orderBy),
