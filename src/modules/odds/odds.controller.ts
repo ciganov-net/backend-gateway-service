@@ -46,7 +46,6 @@ export class OddsController {
 	@ApiOkResponse({
 		type: [CategoryResponse]
 	})
-	@Protected()
 	@Get('categories')
 	@HttpCode(HttpStatus.OK)
 	async getCategories(): Promise<CategoryResponse[]> {
@@ -107,7 +106,6 @@ export class OddsController {
 	@ApiOkResponse({
 		type: [EventResponse]
 	})
-	@Protected()
 	@Get('events')
 	@HttpCode(HttpStatus.OK)
 	async getEvents(@Query() query: GetEventsQuery): Promise<EventResponse[]> {
@@ -133,7 +131,6 @@ export class OddsController {
 	@ApiOkResponse({
 		type: EventResponse
 	})
-	@Protected()
 	@Get('event/:id')
 	@HttpCode(HttpStatus.OK)
 	async getEvent(@Param('id') id: string): Promise<EventResponse> {
@@ -159,7 +156,6 @@ export class OddsController {
 	@ApiOkResponse({
 		type: [EventResponse]
 	})
-	@Protected()
 	@Get('event/by-category/:id')
 	@HttpCode(HttpStatus.OK)
 	async getEventsByCategory(@Param('id') id: string): Promise<EventResponse[]> {
@@ -234,7 +230,6 @@ export class OddsController {
 	@ApiOkResponse({
 		type: [EventResponse]
 	})
-	@Protected()
 	@Get('event/random/:randomCount')
 	@HttpCode(HttpStatus.OK)
 	async getRandomEvents(

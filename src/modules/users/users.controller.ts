@@ -59,13 +59,13 @@ export class UsersController {
 	@ApiOkResponse({
 		type: [GetWorstPlayersResponse]
 	})
-	@Protected()
 	@Get('worst-players/:count')
 	@HttpCode(HttpStatus.OK)
 	public async getWorstPlayers(
 		@Param('count') count: number
 	): Promise<GetWorstPlayersResponse[]> {
 		const { users } = await lastValueFrom(this.client.getWorstPlayers(count))
+		console.log(users)
 		return users
 	}
 }

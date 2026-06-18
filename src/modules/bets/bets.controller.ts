@@ -54,7 +54,6 @@ export class BetsController {
 	@ApiOkResponse({
 		type: GetBetCountResponse
 	})
-	@Protected()
 	@Get('count/:eventId')
 	@HttpCode(HttpStatus.OK)
 	async getBetCount(
