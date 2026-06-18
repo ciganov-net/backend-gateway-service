@@ -4,6 +4,6 @@ import { ConfigService } from '@nestjs/config'
 export function corsCfg(configService: ConfigService): CorsOptions {
 	return {
 		credentials: true,
-		origin: configService.getOrThrow<string>('HTTP_CORS').split(',')
+		origin: true
 	}
 }
