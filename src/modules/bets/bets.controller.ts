@@ -76,7 +76,7 @@ export class BetsController {
 		@CurrentUser('id') id: string
 	): Promise<GetUserBetsResponse[]> {
 		const bets = await lastValueFrom(this.client.getUserBets(id))
-
+		
 		return bets.bets.map(value => ({
 			status: convertEnum(BetStatus, value.status),
 			actualPayout: value.actualPayout,
