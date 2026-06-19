@@ -1,4 +1,4 @@
-import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger'
+import { ApiPropertyOptional } from '@nestjs/swagger'
 
 export class PatchUserRequest {
 	@ApiPropertyOptional({
@@ -20,4 +20,9 @@ export class PatchUserRequest {
 		example: 0
 	})
 	loseAmount: number
+
+	@ApiPropertyOptional({
+		example: "somefile.png"
+	})
+	avatar?: string
 }

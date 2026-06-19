@@ -13,6 +13,7 @@ import { UsersModule } from '@/modules/users/users.module'
 import { ObservabilityModule } from '@/observability/observability.module'
 
 import { AppController } from './app.controller'
+import { MediaModule } from '@/modules/media/media.module'
 
 @Module({
 	imports: [
@@ -34,7 +35,8 @@ import { AppController } from './app.controller'
 		BetsModule,
 		OddsModule,
 		BonusesModule,
-		CrashModule
+		CrashModule,
+		MediaModule
 	],
 	controllers: [AppController]
 })
